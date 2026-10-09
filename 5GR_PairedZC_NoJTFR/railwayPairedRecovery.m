@@ -32,6 +32,8 @@ end
 result.valid = isfinite(d0);
 result.score = 0; result.delaySamples = NaN; result.cfoHz = NaN;
 result.priorHz = fPrior; result.coarseDelaySamples = d0;
+result.coarseCfoHz = fPrior+integerCfo;
+result.rawCfoHz = NaN; % retain estimate before prior rejection for fair RMSE
 result.phaseCoherence = NaN;
 result.timingPower = zeros(cfg.maxDelaySamples+1,1);
 if ~result.valid, return; end
@@ -55,6 +57,7 @@ for iteration = 1:cfg.phaseIterations
     delay = position-1;
 end
 % A prior-support rejection is observable behavior, never silently oracle-correct.
+result.rawCfoHz = frequency;
 result.valid = abs(frequency-fPrior)<=cfg.priorUncertaintyHz;
 if ~result.valid, return; end
 result.delaySamples = delay;
