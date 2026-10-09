@@ -282,7 +282,7 @@ k_bar_table = [
 k_bar = NaN;
 N_RB_RA = NaN;
 warning('off');
-for n = 1:size(k_bar_table)
+for n = 1:size(k_bar_table,1)
    if k_bar_table(n,1) == L_RA && k_bar_table(n,2) == scs_RA && k_bar_table(n,3) == scs_PUSCH
        N_RB_RA = k_bar_table(n,4);
        k_bar = k_bar_table(n,5);
